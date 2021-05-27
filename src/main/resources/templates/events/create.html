@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Create Event</title>
+</head>
+<body>
+
+<h1>Create Event</h1>
+
+
+<!-- The action can be left off, because the handle lives
+at it's location, leaving it for academic purposes-->
+<form method="post" action="/events/create">
+    <input type="text" name="eventName">
+    <input type="submit" value="Create Event">
+</form>
+
+</body>
+</html>
