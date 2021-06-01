@@ -1,5 +1,7 @@
 package org.launchcode.codingevents.controllers;
 
+import org.launchcode.codingevents.data.EventData;
+import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,24 +18,10 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
-    //Using List is coding at the interface type, which i better
-    //practice, even though it is an arrayList
-    private static List<String> events = new ArrayList<>();
-
     @GetMapping
     public String displayAllEvents(Model model) {
-        //events.put("Hat", "Pipe");
-
-//        for (int i = 0, j = events.size(); i < j; i++) {
-//            events.get(i).toString();
-//        }
-
-        HashMap<String,String> events = new HashMap<>();
-        events.put("StrangeLoop", "Big coding event");
-        events.put("Battle Bagel", "Big bagel event");
-        events.put("Meshuggah", "Bear boots");
-
-        model.addAttribute("events", events);
+        model.addAttribute("title", "All Events");
+        model.addAttribute("events", EventData.getAll());
 
         return "events/index";
     }
@@ -49,11 +37,10 @@ public class EventController {
     //Is get mapping and the other is post, it handles
     //different events, other wise would not work.
     @PostMapping("create")
-    public String createEvent(@RequestParam String eventName) {
-        //events.add(eventName);
-        //Because events is the root path it is not needed
-        //Can be return "redirect:"
-        //Leaving for academic purpose
-        return "redirect:/events";
+    public String createEvent(@RequestParam String eventName,
+                              @RequestParam String eventDescription) {
+        EventData.add(new Event(eventName, eventDescription));
+        //return "redirect:/events";
+        return "redirect:";
     }
 }
