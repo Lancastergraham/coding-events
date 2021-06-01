@@ -1,25 +1,20 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
-
 <body class="container">
-
-<h1>Create Event</h1>
-
-<nav th:replace="fragments :: navigation"></nav>
-
+<header th:replace="fragments :: styledHeader"></header>
 
 <!-- The action can be left off, because the handle lives
 at it's location, leaving it for academic purposes-->
 <form method="post" action="/events/create">
     <div class="form-group">
         <lable>Name
-            <input type="text" name="eventName" class="form-control">
+            <input type="text" name="name" class="form-control">
         </lable>
     </div>
     <div class="form-group">
         <lable>Description
-            <input type="text" name="eventDescription"
+            <input type="text" name="description"
                    class="form-control">
         </lable>
     </div>
