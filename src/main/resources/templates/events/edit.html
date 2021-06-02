@@ -24,6 +24,14 @@ at it's location, leaving it for academic purposes-->
                    th:value="${event.getDescription()}">
         </lable>
     </div>
+
+    <div class="form-group">
+        <lable>Contact Email
+            <input type="text" name="contactEmail"
+                   class="form-control"
+            th:value="${event.getContactEmail()}">
+        </lable>
+    </div>
     <div class="form-group">
         <input type="submit" value="Edit Event"
                class="btn btn-success">

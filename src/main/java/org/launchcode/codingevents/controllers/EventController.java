@@ -4,12 +4,10 @@ import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("events")
@@ -27,6 +25,7 @@ public class EventController {
     @GetMapping("create")
     public String renderCreateEventForm(Model model) {
         model.addAttribute("title", "Create Events");
+        model.addAttribute(new Event());
 
         return "events/create";
     }
@@ -36,7 +35,14 @@ public class EventController {
     //Is get mapping and the other is post, it handles
     //different events, other wise would not work.
     @PostMapping("create")
-    public String createEvent(@ModelAttribute Event newEvent) {
+    public String createEvent(@ModelAttribute @Valid Event newEvent,
+                              Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Create Events");
+
+            return "events/create";
+        }
 
         EventData.add(newEvent);
         //return "redirect:/events";
@@ -76,10 +82,17 @@ public class EventController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name,
-                                  String description) {
+    public String processEditForm(@Valid int eventId, String name,
+                                  String description, String contactEmail,
+                                  Errors errors, Model model) {
+
+        if(errors.hasErrors()){
+
+        }
+
         EventData.getById(eventId).setName(name);
         EventData.getById(eventId).setDescription(description);
+        EventData.getById(eventId).setContactEmail(contactEmail);
 
         return "redirect:/events";
     }
