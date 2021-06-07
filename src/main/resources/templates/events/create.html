@@ -7,28 +7,66 @@
 <!-- The action can be left off, because the handle lives
 at it's location, leaving it for academic purposes-->
 
-<form method="post" action="/events/create">
+<form method="post" action="/events/create" th:object="${event}">
     <div class="form-group">
-        <lable>Name
-            <input th:field="${event.name}" class="form-control">
-        </lable>
-        <p class="error" th:errors="${event.name}"></p>
+        <label>Name
+            <input th:field="*{name}" class="form-control">
+        </label>
+        <p class="error" th:errors="*{name}"></p>
     </div>
     <div class="form-group">
-        <lable>Description
-            <input th:field="${event.description}"
+        <label>Description
+            <input th:field="*{description}"
                    class="form-control">
-        </lable>
-        <p class="error" th:errors="${event.description}"></p>
+        </label>
+        <p class="error" th:errors="*{description}"></p>
 
     </div>
     <div class="form-group">
-    <lable>Contact Email
-        <input th:field="${event.contactEmail}"
+    <label>Contact Email
+        <input th:field="*{contactEmail}"
                class="form-control">
-    </lable>
-        <p class="error" th:errors="${event.contactEmail}"></p>
+    </label>
+        <p class="error" th:errors="*{contactEmail}"></p>
 
+    </div>
+
+    <div class="form-group">
+        <label>Location
+            <input th:field="*{location}"
+                   class="form-control">
+        </label>
+        <p class="error" th:errors="*{location}"></p>
+
+    </div>
+
+    <div class="form-group">
+        <label>Registration Required?
+            <input type="checkbox" th:value="*{registrationRequired}"
+                   th:field="*{registrationRequired}"
+                   class="form-control">
+        </label>
+        <p class="error" th:errors="*{registrationRequired}"></p>
+    </div>
+
+    <div class="form-group">
+        <label>Number of Attendees:
+            <input type="number"  th:field="*{numberOfAttendees}"
+                   class="form-control">
+        </label>
+        <p class="error" th:errors="*{numberOfAttendees}"></p>
+
+    </div>
+
+    <div class="form-group">
+        <label>Type
+            <select th:field="*{type}">
+                <option th:each="type:${types}"
+                    th:value="${type}"
+                    th:text="${type.displayName}"
+                ></option>
+            </select>
+        </label>
     </div>
 
     <div class="form-group">
